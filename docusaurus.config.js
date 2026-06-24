@@ -70,7 +70,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "D-Robotics", // Usually your GitHub org/user name.
-  projectName: "rdk_s_doc", // Usually your repo name.
+  projectName: "accessories_doc", // Usually your repo name.
 
   // onBrokenLinks: 'throw',
 
