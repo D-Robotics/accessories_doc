@@ -161,6 +161,8 @@ const config = {
       },
     ],
     "docusaurus-plugin-image-zoom",
+    // 配件旧站 /accessories_doc/ 拆分后的页级迁移重定向（自定义 postBuild 覆盖旧路由，见 plugins/legacy-redirects.js）
+    require.resolve("./plugins/legacy-redirects.js"),
   ],
   markdown: {
     mermaid: true,
