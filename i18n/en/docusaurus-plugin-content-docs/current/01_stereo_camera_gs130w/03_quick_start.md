@@ -67,6 +67,18 @@ source /opt/tros/humble/setup.bash
 ros2 launch mipi_cam mipi_cam_dual_channel.launch.py mipi_image_width:=1280 mipi_image_height:=1088
 ```
 
+:::note Stereo depth: set `mipi_rotation:=90.0`
+
+If you use the left and right images for stereo matching or depth, launch with the rotation set:
+
+```bash
+ros2 launch mipi_cam mipi_cam_dual_channel.launch.py mipi_image_width:=1280 mipi_image_height:=1088 mipi_rotation:=90.0
+```
+
+The GS130W calibration data stores a 90 degree angle and the driver turns the output by `mipi_rotation` minus that angle. With the default `0.0` the output is turned 270 degrees: matching points are shifted vertically between the two images, and the `camera_info` matrices describe the rotated frame. With `90.0` the shift is horizontal. Tested on one GS130W with RDK X5 (RDK OS 3.5.0, `tros-humble-mipi-cam` 2.5.2). Details: [hobot_mipi_cam issue #115](https://github.com/D-Robotics/hobot_mipi_cam/issues/115).
+
+:::
+
 **2. If the program outputs the following messages, the node has started successfully**
 
 ```text
