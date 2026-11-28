@@ -67,6 +67,18 @@ source /opt/tros/humble/setup.bash
 ros2 launch mipi_cam mipi_cam_dual_channel.launch.py mipi_image_width:=1280 mipi_image_height:=1088
 ```
 
+:::note 双目深度：请设置 `mipi_rotation:=90.0`
+
+如果需要用左右目图像做立体匹配或深度计算，请在启动时设置旋转角度：
+
+```bash
+ros2 launch mipi_cam mipi_cam_dual_channel.launch.py mipi_image_width:=1280 mipi_image_height:=1088 mipi_rotation:=90.0
+```
+
+GS130W 标定数据中保存的角度为 90 度，驱动输出时的旋转角度为 `mipi_rotation` 减去该角度。使用默认值 `0.0` 时，输出会旋转 270 度：左右图像的匹配点在垂直方向错开，`camera_info` 中的矩阵描述的也是旋转后的图像。设置为 `90.0` 后，视差为水平方向。以上在一台 GS130W 与 RDK X5（RDK OS 3.5.0，`tros-humble-mipi-cam` 2.5.2）上测试。详情见 [hobot_mipi_cam issue #115](https://github.com/D-Robotics/hobot_mipi_cam/issues/115)。
+
+:::
+
 **2. 如程序输出如下信息，说明节点已成功启动**
 
 ```text
